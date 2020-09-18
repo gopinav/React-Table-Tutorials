@@ -12,6 +12,7 @@ export const BasicTable = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    footerGroups,
     rows,
     prepareRow
   } = useTable({
@@ -42,6 +43,16 @@ export const BasicTable = () => {
           )
         })}
       </tbody>
+      <tfoot>
+        {footerGroups.map(group => (
+          <tr {...group.getFooterGroupProps()}>
+            {group.headers.map(column => (
+              <td {...column.getFooterProps()}>{column.render('Footer')}</td>
+            ))}
+          </tr>
+        ))}
+      </tfoot>
+    
     </table>
   )
 }
