@@ -32,7 +32,7 @@ export const BasicTable = () => {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
+        {rows.map((row) => {
           prepareRow(row)
           return (
             <tr {...row.getRowProps()}>
@@ -44,9 +44,9 @@ export const BasicTable = () => {
         })}
       </tbody>
       <tfoot>
-        {footerGroups.map(group => (
-          <tr {...group.getFooterGroupProps()}>
-            {group.headers.map(column => (
+        {footerGroups.map(footerGroup => (
+          <tr {...footerGroup.getFooterGroupProps()}>
+            {footerGroup.headers.map(column => (
               <td {...column.getFooterProps()}>{column.render('Footer')}</td>
             ))}
           </tr>
