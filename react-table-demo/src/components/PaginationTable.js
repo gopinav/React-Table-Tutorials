@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
-import { useTable } from 'react-table'
+import { useTable, usePagination } from 'react-table'
 import MOCK_DATA from './MOCK_DATA.json'
 import { COLUMNS } from './columns'
 import './table.css'
 
-export const BasicTable = () => {
+export const PaginationTable = () => {
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => MOCK_DATA, [])
 
@@ -12,13 +12,18 @@ export const BasicTable = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
-    prepareRow,
+    page,
+    nextPage,
+    previousPage,
+    canPreviousPage,
+    canNextPage,
+    prepareRow
   } = useTable(
     {
       columns,
       data
-    }
+    },
+    usePagination
   )
 
   return (
@@ -28,15 +33,13 @@ export const BasicTable = () => {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>
-                  {column.render('Header')}
-                </th>
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
+          {page.map(row => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>
@@ -48,6 +51,14 @@ export const BasicTable = () => {
           })}
         </tbody>
       </table>
+      <div>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          Previous
+        </button>{' '}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          Next
+        </button>{' '}
+      </div>
     </>
   )
 }
