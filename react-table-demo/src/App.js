@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.css'
-import { RowSelection } from './components/RowSelection'
+import { ColumnHiding } from './components/ColumnHiding'
 
 function App() {
   return (
     <div className='App'>
-      <RowSelection />
+      <ColumnHiding />
     </div>
   )
 }
