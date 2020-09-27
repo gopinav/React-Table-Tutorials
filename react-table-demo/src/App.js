@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.css'
-import { ColumnHiding } from './components/ColumnHiding'
+import { BasicTable } from './components/BasicTable'
 
 function App() {
   return (
     <div className='App'>
-      <ColumnHiding />
+      <BasicTable />
     </div>
   )
 }
